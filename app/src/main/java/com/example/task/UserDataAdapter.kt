@@ -2,10 +2,7 @@ import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.task.R
-import com.example.task.TaskData
 import com.example.task.databinding.ItemLayoutBinding
 class UserDataAdapter(
     private var taskDataList: MutableList<TaskData>,
@@ -16,7 +13,7 @@ class UserDataAdapter(
         fun bindData(taskData: TaskData) {
             Log.d("UserDataAdapter", "Binding data: $taskData")
 
-            binding.taskData = taskData
+            binding.taskData
 
             binding.editTask.setOnClickListener {
                 Log.d("UserDataAdapter", "Edit button clicked for user: $taskData")

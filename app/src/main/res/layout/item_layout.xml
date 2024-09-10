@@ -5,7 +5,7 @@
     <data>
         <variable
             name="taskData"
-            type="com.example.task.TaskData"/>
+            type="com.example.task." />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
