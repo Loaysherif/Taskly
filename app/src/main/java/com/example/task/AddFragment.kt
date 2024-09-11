@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -38,7 +37,7 @@ class AddFragment : Fragment() {
             val selectedPriority = binding.prioritySpinner.selectedItemPosition
 
             if (taskText.isNotBlank()) {
-                val newTask = TaskData(taskText, selectedPriority)
+                val newTask = TaskData(priority = selectedPriority , task = taskText,)
                 viewModel.addTaskData(newTask)
                 Toast.makeText(context, "Task added", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()

@@ -1,42 +1,34 @@
 package com.example.task
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class UserViewModel : ViewModel() {
-     private val _taskDataList = MutableLiveData<MutableList<TaskData>>()
-     val taskDataList: LiveData<MutableList<TaskData>> = _taskDataList
-
+class UserViewModel(application: Application): AndroidViewModel(application) {
+     private val TaskRepo:TaskRepo
+     val taskDataList: LiveData<List<TaskData>>
      init {
-          initializeData()
+          val taskDao = TaskDatabase.getDatabase(application).taskDao()
+            TaskRepo = TaskRepo(taskDao)
+            taskDataList = TaskRepo.allTasks
      }
 
-     // Add a new task
-     fun addTaskData(task: TaskData) {
-          _taskDataList.value = _taskDataList.value?.apply { add(task) } ?: mutableListOf(task)
+     // Add a new
+
+     fun addTaskData(task: TaskData)=viewModelScope.launch {
+          TaskRepo.insertTask(task)
      }
 
-     // Update an existing task at the specified position
-     fun updateTaskData(task: TaskData, position: Int) {
-          _taskDataList.value = _taskDataList.value?.apply {
-               if (position in indices) {
-                    this[position] = task
-               }
-          }
+     fun updateTaskData(task: TaskData)=viewModelScope.launch {
+          TaskRepo.updateTask(task)
      }
 
-     // Initialize with some sample data
-     private fun initializeData() {
-          _taskDataList.value = mutableListOf(
-               TaskData("Finish Project" , 1),
-               TaskData("Fly a Plane" , 2),
-               TaskData("Learn Kotlin" , 0)
-          )
-     }
-
-     // Delete a task
-     fun deleteTaskData(task: TaskData) {
-          _taskDataList.value = _taskDataList.value?.apply { remove(task) }
+     fun deleteTaskData(task: TaskData)=viewModelScope.launch {
+          TaskRepo.deleteTask(task)
      }
 }
+
+
+

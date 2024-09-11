@@ -1,11 +1,9 @@
 package com.example.task
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -48,8 +46,8 @@ class EditFragment : Fragment() {
             val selectedPriority = binding.prioritySpinner.selectedItemPosition
 
             if (updatedTask.isNotBlank() && position != -1) {
-                val updatedTaskData = TaskData(updatedTask, selectedPriority)
-                viewModel.updateTaskData(updatedTaskData, position)
+                val updatedTaskData = TaskData(selectedPriority, updatedTask, position)
+                viewModel.updateTaskData(updatedTaskData)
                 Toast.makeText(context, "Task updated", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
             } else {
