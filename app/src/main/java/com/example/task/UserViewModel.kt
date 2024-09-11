@@ -28,6 +28,9 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
      fun deleteTaskData(task: TaskData)=viewModelScope.launch {
           TaskRepo.deleteTask(task)
      }
+     fun getUserById(id: Int): TaskData? {
+          return taskDataList.value?.find { it.id == id }
+     }
 }
 
 

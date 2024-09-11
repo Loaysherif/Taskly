@@ -14,7 +14,6 @@ import com.example.task.databinding.FragmentEditBinding
 class EditFragment : Fragment() {
     private lateinit var binding: FragmentEditBinding
     private val viewModel: UserViewModel by activityViewModels()
-    private var position = -1 // Initialize to -1 to handle invalid positions
 
 
     override fun onCreateView(
@@ -35,8 +34,8 @@ class EditFragment : Fragment() {
 
         arguments?.let {
             val task = it.getString("task") ?: ""
-            position = it.getInt("position", -1)
             val priority = it.getInt("priority", 0)
+//            val id = it.getInt("id", 0)
             binding.taskEditText.setText(task)
             binding.prioritySpinner.setSelection(priority)
         }
@@ -44,9 +43,11 @@ class EditFragment : Fragment() {
         binding.saveButton.setOnClickListener {
             val updatedTask = binding.taskEditText.text.toString()
             val selectedPriority = binding.prioritySpinner.selectedItemPosition
+            val userId = arguments?.getInt("id") ?: return@setOnClickListener
 
-            if (updatedTask.isNotBlank() && position != -1) {
-                val updatedTaskData = TaskData(selectedPriority, updatedTask, position)
+
+            if (updatedTask.isNotBlank() ) {
+                val updatedTaskData = TaskData(priority = selectedPriority, task =  updatedTask, id =userId)
                 viewModel.updateTaskData(updatedTaskData)
                 Toast.makeText(context, "Task updated", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()

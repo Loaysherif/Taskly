@@ -36,7 +36,8 @@ class ListFragment : Fragment() {
                     R.id.editFragment,
                     bundleOf(
                         "task" to userItem.task, // Pass task text
-                        "position" to position // Pass task position
+                        "id" to userItem.id, // Pass task id
+                        "priority" to userItem.priority // Pass task priority
 
                     )
                 )
