@@ -1,10 +1,8 @@
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.task.R
 import com.example.task.TaskData
 import com.example.task.databinding.ItemLayoutBinding
 
@@ -26,15 +24,7 @@ class UserDataAdapter(
                 onItemDelete(taskData)
             }
 
-            // Set the color based on priority
-            when (taskData.priority) {
-                0 -> binding.priorityIndicator.setBackgroundColor(
-                    ContextCompat.getColor(binding.root.context, R.color.urgentColor))
-                1 -> binding.priorityIndicator.setBackgroundColor(
-                    ContextCompat.getColor(binding.root.context, R.color.importantColor))
-                2 -> binding.priorityIndicator.setBackgroundColor(
-                    ContextCompat.getColor(binding.root.context, R.color.normalColor))
-            }
+
         }
     }
 

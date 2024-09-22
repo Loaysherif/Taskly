@@ -19,15 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp">
-
-            <View
-                android:id="@+id/priorityIndicator"
-                android:layout_width="32dp"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/name"
                 android:text="@{taskData.task}"

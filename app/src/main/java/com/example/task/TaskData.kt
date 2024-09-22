@@ -8,5 +8,4 @@ import java.io.Serializable
 data class TaskData(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val task: String,
-    val priority: Int
 ) : Serializable

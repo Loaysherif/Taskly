@@ -36,7 +36,6 @@ class ListFragment : Fragment() {
                     bundleOf(
                         "task" to userItem.task, // Pass task text
                         "id" to userItem.id, // Pass task id
-                        "priority" to userItem.priority // Pass task priority
 
                     )
                 )
