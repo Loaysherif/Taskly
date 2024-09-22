@@ -1,10 +1,13 @@
 package com.example.task
 
 import UserDataAdapter
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -71,9 +74,22 @@ class ListFragment : Fragment() {
         if (viewModel.taskDataList.value.isNullOrEmpty()) {
             binding.emptyTextView.visibility = View.VISIBLE
             binding.mylist.visibility = View.GONE
+
+            // Set text color based on the theme
+            val currentNightMode = AppCompatDelegate.getDefaultNightMode()
+            if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES || currentNightMode == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM && isDarkTheme()) {
+                binding.emptyTextView.setTextColor(Color.WHITE) // White text for dark theme
+            } else {
+                binding.emptyTextView.setTextColor(Color.BLACK) // Black text for light theme
+            }
         } else {
             binding.emptyTextView.visibility = View.GONE
             binding.mylist.visibility = View.VISIBLE
         }
+    }
+
+    // Helper function to check if the current theme is dark
+    private fun isDarkTheme(): Boolean {
+        return (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     }
 }
