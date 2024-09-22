@@ -31,7 +31,6 @@ class ListFragment : Fragment() {
         val adapter = UserDataAdapter(
             viewModel.taskDataList.value ?: mutableListOf(),
             { userItem ->
-                val position = viewModel.taskDataList.value?.indexOf(userItem) ?: -1
                 findNavController().navigate(
                     R.id.editFragment,
                     bundleOf(
@@ -42,6 +41,7 @@ class ListFragment : Fragment() {
                     )
                 )
             },
+
             // Handle item deletion
             { userItem ->
                 viewModel.deleteTaskData(userItem)
